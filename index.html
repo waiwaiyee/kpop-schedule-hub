@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="K-POP SCHEDULE HUB — your personal comeback, concert, fan meeting, and music show planner." />
+  <title>K-POP SCHEDULE HUB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#dashboard" aria-label="K-POP Schedule Hub home">
+        <span class="brand-mark">✦</span>
+        <span><strong>K-POP</strong><small>SCHEDULE HUB</small></span>
+      </a>
+      <nav class="main-nav" aria-label="Main navigation">
+        <a class="nav-item active" href="#dashboard" data-section="dashboard"><span>◈</span> Dashboard</a>
+        <a class="nav-item" href="#calendar" data-section="calendar"><span>▦</span> Calendar</a>
+        <a class="nav-item" href="#events" data-section="events"><span>◷</span> All events</a>
+        <a class="nav-item" href="#artists" data-section="artists"><span>♧</span> My artists</a>
+      </nav>
+      <div class="sidebar-note"><span class="sparkle">✦</span><strong>Stay in the loop.</strong><p>Never miss a beat, comeback, or encore.</p></div>
+      <div class="sidebar-footer">Made for the fandom<br><span>♡ Always cheering</span></div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <button class="mobile-menu" id="mobileMenu" aria-label="Open navigation">☰</button>
+        <div><p class="eyebrow">YOUR PERSONAL FAN PLANNER</p><h1 id="pageTitle">Good morning, fan ✨</h1></div>
+        <div class="top-actions"><button class="icon-button" id="quickAdd" title="Add event">＋</button><div class="avatar">♡</div></div>
+      </header>
+
+      <section id="dashboard" class="page-section active-section">
+        <div class="hero-grid">
+          <div class="hero-card"><div><p class="eyebrow light">NEXT UP</p><h2 id="nextEventTitle">No upcoming events</h2><p id="nextEventMeta" class="hero-meta">Add an event to start your countdown.</p><div class="countdown" id="countdown"><div><strong>—</strong><span>DAYS</span></div><i>:</i><div><strong>—</strong><span>HRS</span></div><i>:</i><div><strong>—</strong><span>MIN</span></div><i>:</i><div><strong>—</strong><span>SEC</span></div></div></div><div class="hero-orb">♡</div></div>
+          <div class="stat-card"><span class="stat-icon purple">◷</span><div><p>Total events</p><strong id="totalEvents">0</strong><small>on your radar</small></div></div>
+          <div class="stat-card"><span class="stat-icon pink">♧</span><div><p>Following</p><strong id="totalArtists">0</strong><small>favorite artists</small></div></div>
+        </div>
+        <div class="content-heading"><div><p class="eyebrow">YOUR LINEUP</p><h2>Upcoming events</h2></div><button class="text-button" data-route="events">View all <span>→</span></button></div>
+        <div id="upcomingEvents" class="event-grid"></div>
+        <div class="content-heading artists-heading"><div><p class="eyebrow">YOUR FAVES</p><h2>Favorite artists</h2></div><button class="text-button" data-route="artists">Manage <span>→</span></button></div>
+        <div id="artistStrip" class="artist-strip"></div>
+      </section>
+
+      <section id="events" class="page-section"><div class="section-header"><div><p class="eyebrow">KEEP TRACK</p><h2>All events</h2></div><button class="primary-button" id="addEventBtn">＋ Add event</button></div><div class="filters"><div class="filter-tabs" id="categoryFilters"><button class="filter active" data-category="all">All</button><button class="filter" data-category="comeback">Comebacks</button><button class="filter" data-category="concert">Concerts</button><button class="filter" data-category="fanmeeting">Fan meetings</button><button class="filter" data-category="musicshow">Music shows</button></div><select id="artistFilter" aria-label="Filter by artist"><option value="all">All artists</option></select></div><div id="allEvents" class="event-list"></div></section>
+
+      <section id="calendar" class="page-section"><div class="section-header"><div><p class="eyebrow">SEE THE BIG PICTURE</p><h2>Calendar</h2></div><div class="calendar-controls"><button class="icon-button" id="prevMonth" aria-label="Previous month">‹</button><strong id="calendarLabel"></strong><button class="icon-button" id="nextMonth" aria-label="Next month">›</button></div></div><div class="calendar-card"><div class="weekdays"><span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span></div><div id="calendarGrid" class="calendar-grid"></div></div></section>
+
+      <section id="artists" class="page-section"><div class="section-header"><div><p class="eyebrow">YOUR STAN LIST</p><h2>My artists</h2></div><button class="primary-button" id="addArtistBtn">＋ Add artist</button></div><div id="artistsGrid" class="artists-grid"></div></section>
+    </main>
+  </div>
+
+  <div class="modal-backdrop" id="modalBackdrop" hidden><div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><button class="modal-close" id="modalClose" aria-label="Close dialog">×</button><p class="eyebrow" id="modalEyebrow">ADD TO YOUR HUB</p><h2 id="modalTitle">Add an event</h2><form id="modalForm"><div id="eventFields"><label>Artist name<input name="artist" required maxlength="50" placeholder="e.g. NewJeans" /></label><label>Event title<input name="title" required maxlength="80" placeholder="e.g. 3rd EP — Blue Hour" /></label><div class="form-row"><label>Date<input type="date" name="date" required /></label><label>Time<input type="time" name="time" required /></label></div><label>Category<select name="category" required><option value="comeback">Comeback</option><option value="concert">Concert</option><option value="fanmeeting">Fan meeting</option><option value="musicshow">Music show</option></select></label></div><div id="artistFields" hidden><label>Artist name<input name="artistName" required maxlength="50" placeholder="e.g. PLAVE" /></label><label>Fandom name<textarea name="artistNote" maxlength="100" placeholder="e.g. PLLI"></textarea></label></div><p class="form-error" id="formError" role="alert"></p><button class="primary-button full" type="submit">Save to my hub <span>→</span></button></form></div></div>
+  <script src="app.js"></script>
+</body>
+</html>
